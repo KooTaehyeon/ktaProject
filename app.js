@@ -13,9 +13,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('dev'));
 const indexRouter = require('./routes/indexRouter');
+const movieRouter = require('./routes/movieRouter');
 app.use(cors()); //모든 도메인 허용
 
 app.use('/', indexRouter);
+app.use('/movie', movieRouter);
 
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);
