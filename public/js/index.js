@@ -83,7 +83,7 @@ const showResult = (data, opt) => {
         str = "<table class='table table-striped'><thead><tr><th scope='col'>순위</th><th scope='col'>제목</th><th scope='col'>개봉일</th></tr></thead><tbody>";  // 출력할 문자열 초기화
         data.sort((x, y) => y.openDt - x.openDt)
             .forEach((element, i) => {
-                str += `<tr><th scope='row'>${i + 1}</th><td><a href="/movie/${element.movieCd}">${element.movieNm}</a></td><td>${element.openDt}</td></tr>`;
+                str += `<tr"><th scope='row'>${i + 1}</th><td><a href="/movie/${element.movieCd}">${element.movieNm}</a></td><td>${element.openDt}</td></tr>`;
             });
     } else if (opt === 2) {
         str = "<table class='table table-striped'><thead><tr><th scope='col'>순번</th><th scope='col'>제목</th><th scope='col'>개봉일</th><th scope='col'>포스터</th></tr></thead><tbody>";  // 출력할 문자열 초기화
@@ -93,11 +93,12 @@ const showResult = (data, opt) => {
             .forEach((element, i) => {
                 title = element.title.replace(/ ?!HS ?| ?!HE ?/g, '').trim();
                 imgArray = element.posters.split('|'); // 포스터 경로 배열로 분리
-                str += `<tr><th scope='row'>${i + 1}</th><td><a href="/movie/${element.movieSeq}">${title}</a></td><td>${element.repRatDate}</td><td><img src="${imgArray[0]}" alt="포스터 이미지"></td></tr>`;
+                str += `<tr><th scope='row'>${i + 1}</th><td><a href="${element.kmdbUrl}" target="_blank">${title}</a></td><td>${element.repRatDate}</td><td><img src="${imgArray[0]}" alt="포스터 이미지"></td></tr>`;
             });
     };
     str += "</tbody></table>";
     result.innerHTML = str;  // 결과 영역에 출력
+    document.querySelector("#keywordInput").value = "";
     if (data.length > 10) result.innerHTML += `항목 수: ${data.length} - 10개 초과되어 페이징 처리 필요`;
 };
 
