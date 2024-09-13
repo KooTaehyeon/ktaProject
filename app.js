@@ -17,6 +17,7 @@ app.use(cors()); //모든 도메인 허용
 
 app.use('/', indexRouter);
 
+
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);
 });
